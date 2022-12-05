@@ -1,39 +1,23 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: Fairwinds Insights
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ main ]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # env variables
     env:
       FAIRWINDS_TOKEN: ${{ secrets.FAIRWINDS_TOKEN }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      # Runs a set of commands using the runners shell
       - name: Fairwinds Insights
         run: |
-          curl -L https://staging.insights.fairwinds.com/v0/insights-ci-2.1.0.sh > insights-ci.sh
-          echo "c7f9e6d6120998ea517419ce4e3de7039af3991ccb3392271dd91754b300d5e2 *insights-ci.sh" | shasum -a 256 --check
+          curl -L https://staging.insights.fairwinds.com/v0/insights-ci-2.2.0.sh > insights-ci.sh
+          echo "1632dca8b4dc043d2a62b1c37fd7a8ac034cb22b359c7119e5c11db9515180b2 *insights-ci.sh" | shasum -a 256 --check
           chmod +x insights-ci.sh
           ./insights-ci.sh
