@@ -1,11 +1,3 @@
-# These images will be scanned for vulnerabilities.
-options:
-  baseBranch: main
-  hostname: https://staging.insights.fairwinds.com
-  organization: acme-co
-  repositoryName: vitorvezani/blog2
-  setExitCode: true
-
 manifests:
   yaml:
     - ./passing.yaml
